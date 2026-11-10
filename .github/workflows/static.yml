@@ -1,4 +1,4 @@
-name: Publish LoneStarAshes Web
+name: Pages small test
 
 on:
   push:
@@ -21,39 +21,24 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      RELEASE_TAG: web-2026-11-10
-      ZIP_NAME: LoneStarAshes-Web-2026-11-10-081051-483.zip
-      ZIP_SHA256: "f38219d576ec20c83b7401d9eec46d6ef0343b677542f7b14e37c26843130fb0"
     steps:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Download and unpack the game
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a tiny test page
         shell: bash
         run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/game-release" "$RUNNER_TEMP/site"
-          gh release download "$RELEASE_TAG" \
-            --repo "$GITHUB_REPOSITORY" \
-            --pattern "$ZIP_NAME" \
-            --dir "$RUNNER_TEMP/game-release"
-          echo "$ZIP_SHA256  $RUNNER_TEMP/game-release/$ZIP_NAME" | sha256sum --check --strict
-          unzip -q "$RUNNER_TEMP/game-release/$ZIP_NAME" -d "$RUNNER_TEMP/site"
-          for file in index.html index.js index.wasm index.pck; do
-            test -s "$RUNNER_TEMP/site/$file"
-          done
+          mkdir -p "$RUNNER_TEMP/site"
+          printf '%s\n' '<!doctype html><meta charset="utf-8"><title>LoneStarAshes Pages test</title><h1>Pages连接正常</h1><p>这是临时测试页，不是游戏。</p>' > "$RUNNER_TEMP/site/index.html"
 
-      - name: Upload the website
+      - name: Upload test page
         uses: actions/upload-pages-artifact@v4
         with:
-          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          name: pages-test-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/site
 
-      - name: Deploy to Pages
+      - name: Deploy test page
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          artifact_name: pages-test-${{ github.run_id }}-${{ github.run_attempt }}
