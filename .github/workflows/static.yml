@@ -1,4 +1,4 @@
-name: Publish LoneStarAshes Web Slim
+name: Publish LoneStarAshes Web UI Update
 
 on:
   push:
@@ -22,9 +22,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     env:
-      RELEASE_TAG: web-slim-2026-11-10-495
-      ZIP_NAME: LoneStarAshes-Web-Slim-2026-11-10-103409-495.zip
-      ZIP_SHA256: "b8cba71297b76974bedd514fef1c1138a9b99b4e931669d0a320c177a4db7c29"
+      RELEASE_TAG: web-ui-2026-11-17-546
+      ZIP_NAME: LoneStarAshes-Web-UI-2026-11-17-124117-546.zip
+      ZIP_SHA256: "57efbf9d2179b9204091d76959f7e1bd0646b5bd30d2536723b0cb8f752ffac9"
     steps:
       - name: Configure Pages
         uses: actions/configure-pages@v5
