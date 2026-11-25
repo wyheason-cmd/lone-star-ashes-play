@@ -22,9 +22,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     env:
-      RELEASE_TAG: web-2026-11-24-642
-      ZIP_NAME: LoneStarAshes-Web-2026-11-24-642.zip
-      ZIP_SHA256: "b3d17b4fc4110b36f314b8a6cd4661fb0a606f70546654225a2729445da56437"
+      RELEASE_TAG: web-2026-11-26-676
+      ZIP_NAME: LoneStarAshes-Web-2026-11-26-676.zip
+      ZIP_SHA256: "f7359e022586c73593f54e4b1e5524eeff729a4d6ad991a3c0f67eb61426d85c"
     steps:
       - name: Configure Pages
         uses: actions/configure-pages@v5
